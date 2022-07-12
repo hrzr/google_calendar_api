@@ -38,13 +38,14 @@ def main():
             print('No upcoming events found.')
             return
         old_month = 0
-        for event in events:
+        for event_num, event in enumerate(events):
             start = event['start'].get('datetime', event['start'].get('date'))
             month = start.split('-')[1]
             if month != old_month:
-                print('---')
+                if event_num != 0:
+                    print('---')
                 old_month = month
-            print(start, event['summary'])
+            print(event_num + 1, start, event['summary'])
     except HttpError as error:
         print(f"An error occured: {error}")
 
